@@ -1,18 +1,15 @@
 //#region < Globals >
 var Globals = (function(){
   var self = {};
-  self.leftNavigation = {};
+  self.config = {};
 
   self.init = function(){
       return new Promise(function(resolve, reject) {
-          UserRepo.setCurrentUser().then(function(){
-             
-              AppSettingRepo.set().then(function(){
-                  self.isReady = true;
-                 
-                  resolve();
-              });
-          });
+        $.getJSON( "configs/configs.json", function( data ) {
+          self.config = data;
+
+          console.log(self.config.reviews.dc-review.id);
+        });
       });
   };
 

@@ -1,6 +1,6 @@
 {
   "reviews":{
-    "dc-review":{
+    "dc":{
       "id":"dc-review",
       "leftnavigations":{
         "home": {"id": "home", "title":"Home / Agenda", "link":"@site/index.html"}

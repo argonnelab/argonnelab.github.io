@@ -8,7 +8,7 @@ var Globals = (function(){
         $.getJSON( "configs/configs.json", function( data ) {
           self.config = data;
 
-          console.log(self.config.reviews.dc-review.id);
+          console.log(self.config.reviews.dc.id);
         });
       });
   };

@@ -7,9 +7,9 @@ var Globals = (function(){
       return new Promise(function(resolve, reject) {
         $.getJSON( "configs/configs.json", function( data ) {
           self.config = data;
-
-          console.log(self.config.reviews.dc.id);
+          resolve();
         });
+       
       });
   };
 

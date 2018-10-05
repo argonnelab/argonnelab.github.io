@@ -1,0 +1,39 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
+<div id="header-app">
+  <div class="header">
+      {{title}}
+    </div>
+  </div>
+</div>
+
+<script>
+var Header = new Vue({
+el: '#header-app',
+data: {
+  title: ''
+},
+created: function() {
+},
+methods: {
+  setTitle: function(title){
+    this.title = title;
+  }
+}
+});
+</script>
+
+<style>
+  .header {
+    top:0;
+    left:0;
+
+    height: 60px;
+    background-color: #161925;
+    color: #FDFFFC;
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+    padding-top: 11px;
+    padding-left: 20px;
+  }
+</style>

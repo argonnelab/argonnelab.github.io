@@ -1,13 +1,18 @@
 {
-  "reviews":{
-    "dc":{
-      "id":"dc-review",
+  "sites":{
+    "dc2018":{
+      "id":"dc2018",
+      "title": "Washington, DC-2018 CMB-S4 DSR Review",
+      "description": "[ Description goes here ]",
+      "dates": "December 11-13 of 2018",
       "leftnavigations":{
-        "home": {"id": "home", "title":"Home / Agenda", "link":"@site/index.html"}
+        "home": {"id": "home", "route":"home"},
+        "decadalsurveyreport": {"id":"decadalsurveyreport", "title":"Decadal Survey Report"},
+        "cd3adocuments": {"id": "cd3adocuments", "title":"CD-3A Documents", "route":"cd3adocuments", "googledrive":"1dUrCIQ5SCHvT-WxW51wkjgW2y8yp33HE"}
       },
-      "documents": {
-        "cd-3a-documents":{"page": "cd-3a-documents", "id":"1dUrCIQ5SCHvT-WxW51wkjgW2y8yp33HE"}
+      "routes": {
+        "home": {"id": "home", "title":"Home / Agenda", "url":"sites/dc2018/home/home.html", "nav": "home"}
       }
     }
-  }
-  }
+}
+}

@@ -1,0 +1,99 @@
+<div id="leftnavigation-app">
+  <div class="left-nav">
+    <ul class="nav-ul" v-for="name in nav.order">
+        <li @click="routeTo(nav[name])" class="navItem" v-bind:class="{'navItem-active': nav[name].isActive }">
+          <a>
+            <div class="mb-1" v-html="nav[name].image"></div>
+            <div class="hide-md">{{nav[name].title}}</div>
+          </a>
+        </li>
+    </ul>
+  </div>
+</div>
+  
+<script>
+var LeftNavigation = new Vue({
+el: '#leftnavigation-app',
+data: {
+  activeNavName: '',
+  nav: {
+    order: []
+  }
+},
+created: function() {
+},
+methods: {
+}
+});
+</script>
+
+<style>
+
+.nav-ul {
+  padding-left: 5px;
+  text-align: center;
+}
+
+#leftnavigation-app {
+left: 0px;
+top: 85px;
+position:absolute;
+height: 100%;
+background-color: black;
+margin-right: 15px;
+}
+
+.navImg {
+max-width: 30px;
+}
+
+.navItem a {
+text-decoration: none;
+
+}
+
+.navItem {
+  color: #F8F8F8 !important;
+  letter-spacing: 0.3px;
+  font-size: 14px;
+  font-weight: lighter;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: pointer;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 1px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid #3E3E3E;
+}
+
+.navItem > a > div {
+  color:#F8F8F8 !important;
+}
+
+.navItem:hover {
+  background-color: gray !important;
+}
+
+.navItem-active {
+  background-color: #0083CB !important;
+  border: 1px solid white;
+  font-weight: bold;
+  
+}
+
+.left-nav {
+  background-color: black;
+  height: 100%;
+  position: relative;
+  top: 0px;
+  padding-top: 8px;
+  width: 200px;
+}
+
+@media (max-width: 992px) {
+.left-nav {
+  width: 55px;
+}
+}
+</style>

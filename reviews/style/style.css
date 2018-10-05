@@ -9,3 +9,41 @@
 .link:visited {
   color: white !important;
 }
+
+
+  
+.bounceball {
+  position: relative;
+  display: inline-block;
+  height: 37px;
+  width: 15px;
+}
+.bounceball:before {
+    position: relative;
+    content: '';
+    display: block;
+    top: 0;
+    width: 15px;
+    height: 15px;;
+    border-radius: 50%;
+    background-color: #0083CB;
+    transform-origin: 50%;
+    animation: bounce 700ms alternate infinite ease;
+  }
+
+@keyframes bounce {
+  0% {
+    top: 30px;
+    height: 5px;
+    border-radius: 60px 60px 20px 20px;
+    transform: scaleX(2);
+  }
+  35% {
+    height: 15px;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+  100% {
+    top: 0;
+  }
+}

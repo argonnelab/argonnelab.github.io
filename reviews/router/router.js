@@ -49,17 +49,16 @@ var Router = (function() {
     }
     
     if (route.keys != null){
-    var page = _.find(route.keys, function(key){
-        return _.startsWith(key, 'page:');
-    });
-    
-    if (page != undefined) {
-        route.params.page = page.split(':')[1];
-    } else {
-        route.params.page = '';
-    }
-    } else {
-        route.params.page = '';
+        _.forEach(route.keys, function(key){
+            if (key.indexOf(':') !== -1) {
+                route.params[key.split(':')[0]] = key.split(':')[1];
+            } else {
+                var keyVal = self.getUrlParameter(key);
+                if (keyVal != undefined){
+                    route.params[key] = keyVal;
+                }
+            }
+        });
     }
   };
 
@@ -79,12 +78,9 @@ var Router = (function() {
         
       });
 
-      
-
-       
   }
 
-  loadInitPage = function(){  
+  var loadInitPage = function(){  
     self.loadModule('#header-placeholder', self.modules.header);
 
     //Check for Page
@@ -332,6 +328,19 @@ var Router = (function() {
         return window.location.protocol + "//" + window.location.hostname + window.location.pathname;
       }
      
+  }
+
+  self.convertRouteToUrl = function(route){
+
+    var url = self.getCurrentPathUrl();
+      _.forOwn(route.params, function(value, key) {
+        if (value != ''){
+            url = self.addToUrl(url, key, value);
+        }
+        
+    });
+
+    return url;
   }
 
   self.getCurrentUrl = function() {

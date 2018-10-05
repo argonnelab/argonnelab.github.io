@@ -5,7 +5,7 @@
       <h2 class="mt-3 mb-5">Agenda</h2>
       <ul class="nav nav-tabs">
           <li class="nav-item" v-for="day in agendaDays">
-            <a class="nav-link" v-bind:class="{ active: agendas[day].isActive }" @click="showDay(day)">{{ day }}</a>
+            <a class="nav-link" v-bind:class="{ active: agendas[day].isActive }" @click="showDay(agendas[day])">{{ day }}</a>
           </li>
         </ul>
   </div>
@@ -18,6 +18,7 @@ el: '#home-app',
 data: {
   agendaDays: [],
   agendas: {},
+  agendaActive: ''
 },
 created: function() {
   var self = this;
@@ -31,21 +32,46 @@ methods: {
   showInfo: function(data, tabletop) {
     var self = this;
     var days = _.groupBy(data, 'Day');
+    var daySelection = Router.activeRoute.params.day;
+    var activeDay = undefined;
 
     _.forEach(days, function(value, key) {
         self.agendaDays.push(key);
         self.agendas[key] = {};
         self.agendas[key].isActive = false;
+        self.agendas[key].id = key;
+        
         self.agendas[key].events = {};
         self.agendas[key].events = value;
+        if (key == daySelection) {
+         activeDay = self.agendas[key];
+        }
     });
-
-    self.agendas['12/11/2018'].isActive = true;
+    
+  
+    
+    if (activeDay == undefined){
+      self.showDay(self.agendaDays[0]);
+    } else {
+      self.showDay(activeDay);
+    }
+    
+    
   },
+  showDay: function(day){
+    var self = this;
+    if (self.agendaActive != ''){
+      self.agendas[self.agendaActive.id].isActive = false;
+    }
+   
+    day.isActive = true;
+    self.agendaActive = day;
 
-},
-mounted: function() {
-  //'1sbyMINQHPsJctjAtMW0lCfLrcpMqoGMOJj6AN-sNQrc'
+    var url = Router.convertRouteToUrl(Router.activeRoute);
+    url = Router.addToUrl(url, Constants.DAY_QS_PARAM, day.id);
+    Router.pushUrlChange(url);
+  }
+
 }
 });
 </script>

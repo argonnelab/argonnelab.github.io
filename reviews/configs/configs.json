@@ -11,7 +11,7 @@
         "cd3adocuments": {"id": "cd3adocuments", "title":"CD-3A Documents", "route":"cd3adocuments", "googledrive":"1dUrCIQ5SCHvT-WxW51wkjgW2y8yp33HE"}
       },
       "routes": {
-        "home": {"id": "home", "title":"Home / Agenda", "url":"sites/dc2018/home/home.html", "nav": "home"}
+        "home": {"id": "home", "title":"Home / Agenda", "keys":["rid", "day"], "url":"sites/dc2018/home/home.html", "nav": "home"}
       },
       "agenda": {
         "dec112018": {

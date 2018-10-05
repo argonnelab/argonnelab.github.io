@@ -5,6 +5,7 @@ var Constants = (function() {
    self.PAGE_QS_PARAM = "page";
    self.ID_QS_PARAM = 'id';
    self.RID_QS_PARAM = 'rid';
+   self.DAY_QS_PARAM = 'day';
    //#endregion
 
 

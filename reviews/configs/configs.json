@@ -12,6 +12,14 @@
       },
       "routes": {
         "home": {"id": "home", "title":"Home / Agenda", "url":"sites/dc2018/home/home.html", "nav": "home"}
+      },
+      "agenda": {
+        "dec112018": {
+          "order":1, 
+          "events":{
+            "order":1,"time":"8:00am","title":"Discussion of Review Objectives with the Review Committee","instructor":"3J","slides":"" 
+          }
+        } 
       }
     }
 }

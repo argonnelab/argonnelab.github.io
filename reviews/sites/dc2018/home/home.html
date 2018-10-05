@@ -1,15 +1,51 @@
+
+
 <div id="home-app">
-<h2>DC Home</h2>
+  <div class="container-fluid">
+      <h2 class="mt-3 mb-5">Agenda</h2>
+      <ul class="nav nav-tabs">
+          <li class="nav-item" v-for="day in agendaDays">
+            <a class="nav-link" v-bind:class="{ active: agendas[day].isActive }" @click="showDay(day)">{{ day }}</a>
+          </li>
+        </ul>
+  </div>
+
 </div>
 
 <script>
 new Vue({
-el: '#home',
+el: '#home-app',
 data: {
+  agendaDays: [],
+  agendas: {},
 },
 created: function() {
+  var self = this;
+  var tabletop = Tabletop.init({ 
+  key: '1UlpEntHaNt9PQqBdlJ5i6UxrCsP--m6q3SkgJXRySf0', 
+  callback: self.showInfo,
+  simpleSheet: true
+});
 },
 methods: {
+  showInfo: function(data, tabletop) {
+    var self = this;
+    var days = _.groupBy(data, 'Day');
+
+    _.forEach(days, function(value, key) {
+        self.agendaDays.push(key);
+        self.agendas[key] = {};
+        self.agendas[key].isActive = false;
+        self.agendas[key].events = {};
+        self.agendas[key].events = value;
+    });
+
+    self.agendas['12/11/2018'].isActive = true;
+  },
+
+},
+mounted: function() {
+  //'1sbyMINQHPsJctjAtMW0lCfLrcpMqoGMOJj6AN-sNQrc'
 }
 });
 </script>

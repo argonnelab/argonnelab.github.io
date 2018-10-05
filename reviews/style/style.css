@@ -1,3 +1,11 @@
 #content-placeholder {
   top:60px;
 }
+
+.link {
+  color: white !important;
+}
+
+.link:visited {
+  color: white !important;
+}

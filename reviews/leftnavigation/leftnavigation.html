@@ -1,10 +1,10 @@
 <div id="leftnavigation-app">
   <div class="left-nav">
-    <ul class="nav-ul" v-for="name in nav.order">
-        <li @click="routeTo(nav[name])" class="navItem" v-bind:class="{'navItem-active': nav[name].isActive }">
+    <ul class="nav-ul" v-for="nav in navItems">
+        <li @click="routeTo(nav)" :title="nav.title" class="navItem" v-bind:class="{'navItem-active': nav.isActive }">
           <a>
-            <div class="mb-1" v-html="nav[name].image"></div>
-            <div class="hide-md">{{nav[name].title}}</div>
+            <div class="mb-1" v-html="nav.navImage"></div>
+            <div class="hide-md">{{nav.title}}</div>
           </a>
         </li>
     </ul>
@@ -16,13 +16,41 @@ var LeftNavigation = new Vue({
 el: '#leftnavigation-app',
 data: {
   activeNavName: '',
-  nav: {
-    order: []
-  }
+  navItems: {},
+  rid: ''
 },
 created: function() {
 },
 methods: {
+  load: function(site, route){
+    var self = this;
+    self.navItems = _.filter(site.routes, function(r){return r.nav});
+    self.rid = site.id;
+   self.setActive(route);
+  },
+  routeTo: function(route){
+    var self = this;
+    if (self.activeNavName != route.id){
+      route.params.rid = self.rid;
+      self.setActive(route);
+      Router.loadMainToRoute(route, false);
+    }
+  },
+  setActive: function(route){
+    var self = this;
+    
+      _.forEach(self.navItems, function(nav){
+        if (nav.id == route.id){
+          self.$set(nav, 'isActive', true);
+        } else {
+          self.$set(nav, 'isActive', false);
+        }
+      });
+      self.activeNavName = route.id;
+     
+    
+    
+  }
 }
 });
 </script>
@@ -36,10 +64,9 @@ methods: {
 
 #leftnavigation-app {
 left: 0px;
-top: 85px;
-position:absolute;
+position: absolute;
 height: 100%;
-background-color: black;
+
 margin-right: 15px;
 }
 
@@ -57,6 +84,7 @@ text-decoration: none;
   letter-spacing: 0.3px;
   font-size: 14px;
   font-weight: lighter;
+  background-color:#161925;
   text-transform: uppercase;
   list-style: none;
   cursor: pointer;
@@ -64,7 +92,9 @@ text-decoration: none;
   border-bottom-left-radius: 1px;
   padding-top: 8px;
   padding-bottom: 8px;
-  border: 1px solid #3E3E3E;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .navItem > a > div {
@@ -72,18 +102,19 @@ text-decoration: none;
 }
 
 .navItem:hover {
-  background-color: gray !important;
+  background-color: #235789 !important;
 }
 
 .navItem-active {
-  background-color: #0083CB !important;
-  border: 1px solid white;
+  background-color: #BF4E30 !important;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
   font-weight: bold;
-  
 }
 
 .left-nav {
-  background-color: black;
+  background-color: #161925;
   height: 100%;
   position: relative;
   top: 0px;

@@ -10,5 +10,6 @@ var Constants = (function() {
 
 
    self.CONTENT_PLACEHOLDER = '#content-placeholder';
+   self.LEFT_NAV_PLACEHOLDER = '#leftnavigation-placeholder';
   return self;
 }());

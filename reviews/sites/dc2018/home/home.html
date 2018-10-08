@@ -1,8 +1,8 @@
 
 
-<div id="home-app">
+<div class="content-body" id="home-app">
   <div class="container-fluid">
-      <h2 class="mt-3 mb-5">Agenda</h2>
+      <h2 class="mt-1 mb-5">Agenda</h2>
 
       <div class="row" v-if="isLoading">
           <div class="col-12">
@@ -17,11 +17,32 @@
           </div>
       </div>
       <div v-show="!isLoading">
-          <ul class="nav nav-tabs">
-              <li class="nav-item" v-for="day in agendaDays">
-                <a class="nav-link" v-bind:id="agendas[day].id" @click="showDay(agendas[day])">{{ agendas[day].title }}</a>
-              </li>
-            </ul>
+          <ul class="nav nav-tabs mb-2">
+            <li class="nav-item" v-for="day in agendaDays">
+              <a class="nav-link" v-bind:id="agendas[day].id" @click="showDay(agendas[day])">{{ agendas[day].title }}</a>
+            </li>
+          </ul>
+          <div class="ml-3">
+              <table class="table table-sm table-hover">
+                  <thead>
+                    <tr class="border-no-top">
+                      <th class="border-no-top">Time</th>
+                      <th class="border-no-top">Topic</th>
+                      <th class="border-no-top">Speaker</th>
+                      <th class="border-no-top">Slides</th>
+                    </tr>
+                  </thead>
+                  <tbody v-for="event in agendaActive.events">
+                    <tr>
+                      <td>{{ event.Time }}</td>
+                      <td>{{ event.Topic }}</td>
+                      <td>{{ event.Speaker }}</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+         
       </div>
 
       
@@ -36,7 +57,7 @@ data: {
   isLoading: true,
   agendaDays: [],
   agendas: {},
-  agendaActive: ''
+  agendaActive: {}
 },
 created: function() {
   var self = this;
@@ -80,20 +101,18 @@ methods: {
   },
   showDay: function(day){
     var self = this;
-    if (self.agendaActive != ''){
-      $('#' + self.agendaActive).removeClass('active');
+    if (!_.isEmpty(self.agendaActive)){
+      $('#' + self.agendaActive.id).removeClass('active');
     }
    
     $('#' + day.id).addClass('active');
-    self.agendaActive = day.id;
+    self.agendaActive = day;
 
     var url = Router.convertRouteToUrl(Router.activeRoute);
     url = Router.addToUrl(url, Constants.DAY_QS_PARAM, day.title);
     Router.pushUrlChange(url);
 
     self.isLoading = false;
-
-    console.log(day);
   }
 
 }
@@ -101,5 +120,9 @@ methods: {
 </script>
 
 <style>
-
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
 </style>

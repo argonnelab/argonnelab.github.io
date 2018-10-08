@@ -1,0 +1,38 @@
+<div class="content-body" id="decadalsurveyreport-app">
+    <div><h2 class="ml-3 mt-1 mb-3">Decadal Survey Report</h2></div>
+
+    <div class="d-flex flex-column w-100 ml-3">
+        <div class="">
+            <button class="btn btn-link" @click="open_pdf"><i class="far fa-file-pdf mr-1"></i>open pdf</button>
+        </div>
+    </div>
+    <div class="d-flex flex-column ml-3">
+        <div class="w-100">
+            <iframe class="iframe-fill" :src="iframe_src"></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+new Vue({
+el: '#decadalsurveyreport-app',
+data: {
+    id: '1JwSQY4ZhyxXMObD-tj4H8PaygeJPctlm',
+    iframe_src: ''
+},
+created: function() {
+    this.iframe_src = 'https://drive.google.com/file/d/' + this.id + '/preview';
+},
+methods: {
+    open_pdf: function(){
+        var file = 'https://drive.google.com/file/d/' + this.id + '/view';
+       window.open(file, "_blank");
+    }
+}
+});
+</script>
+
+<style>
+
+
+</style>

@@ -5,8 +5,8 @@ var Router = (function() {
   self.activeRoute = {};
 
   self.modules = {
-     leftNavigation: {id: 'leftNavigation', domId: '#leftnavigation-app'},
-     header: {id: 'header', url: 'header/header.html'}
+     leftNavigation: {id: 'leftNavigation', domId: '#leftnavigation-app', url: 'leftnavigation/leftnavigation.html'},
+     header: {id: 'header', url: 'header/header.html', domId:'#header-app'}
   };
 
   //#region < Routes >
@@ -179,17 +179,28 @@ var Router = (function() {
       $(id).load(module.url);
   }
 
-  self.loadRoute = function(id, route){
+  self.loadRoute = function(id, route, loadBackground){
       var self = this;
+      loadBackground = loadBackground == undefined? true : loadBackground;
 
       self.activeRoute = route;
 
-    //   self.waitforComponentToLoad(self.modules.leftNavigation.domId).then(function(){
-    //       LeftNavigation.setActive(route.nav);
-    //       if (typeof Header !== "undefined") {
-    //           Header.setTitle();
-    //       }
-    //   });
+      if (route.nav == true){
+          if (loadBackground){
+            var rId = route.params[Constants.RID_QS_PARAM];
+        
+            self.loadModule(Constants.LEFT_NAV_PLACEHOLDER, self.modules.leftNavigation);
+            self.waitforComponentToLoad(self.modules.leftNavigation.domId).then(function(){
+                var matchedReview = self.routes.sites[rId];
+                LeftNavigation.load(matchedReview, route);
+            });
+          }
+        
+      } else {
+         $(Constants.LEFT_NAV_PLACEHOLDER).empty();
+      }
+
+   
 
     $(id).load(route.url);
 
@@ -202,12 +213,18 @@ var Router = (function() {
       });
 
       self.pushUrlChange(url);
-      
+      if (loadBackground){
+        self.loadModule('#header-placeholder', self.modules.header);
+        self.waitforComponentToLoad(self.modules.header.domId).then(function(){
+            var matchedReview = self.routes.sites[rId];
+            Header.load(matchedReview);
+        });
+      }
       
   };
 
-  self.loadMainToRoute = function(route){
-    self.loadRoute(Constants.CONTENT_PLACEHOLDER, route, true);
+  self.loadMainToRoute = function(route, loadBackground){
+    self.loadRoute(Constants.CONTENT_PLACEHOLDER, route, loadBackground);
   }
 
   self.reloadMainToRoute = function(){

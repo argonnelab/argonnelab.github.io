@@ -2,8 +2,12 @@
 
 <div id="header-app">
   <div class="header">
-      <a class="link" href="/reviews">CMB Reviews</a>
-    </div>
+      <span>
+          <a class="link" href="/reviews">CMB</a>
+      </span>
+      <span class="header-title">
+          <a class="link" @click="home_click">{{ title }}</a>
+      </span>
   </div>
 </div>
 
@@ -11,10 +15,20 @@
 var Header = new Vue({
 el: '#header-app',
 data: {
+  title: '',
+  site: {}
 },
 created: function() {
+  
 },
 methods: {
+  home_click: function(){
+    
+  },
+  load: function(site){
+    this.title = site.title;
+    this.site = site;
+  }
 }
 });
 </script>
@@ -23,7 +37,6 @@ methods: {
   .header {
     top:0;
     left:0;
-
     height: 60px;
     background-color: #161925;
     color: #FDFFFC;
@@ -31,5 +44,18 @@ methods: {
     font-size: 20px;
     padding-top: 11px;
     padding-left: 20px;
+  }
+
+  .header-title {
+      font-size: 1.46em !important;
+      position: absolute;
+      margin-left: 30px;
+  }
+
+  @media (max-width: 992px) {
+    .header-title {
+      font-size: .9em !important;
+      
+  }
   }
 </style>

@@ -5,21 +5,13 @@
       "title": "Washington, DC-2018 CMB-S4 DSR Review",
       "description": "[ Description goes here ]",
       "dates": "December 11-13 of 2018",
-      "leftnavigations":{
-        "home": {"id": "home", "route":"home"},
-        "decadalsurveyreport": {"id":"decadalsurveyreport", "title":"Decadal Survey Report"},
-        "cd3adocuments": {"id": "cd3adocuments", "title":"CD-3A Documents", "route":"cd3adocuments", "googledrive":"1dUrCIQ5SCHvT-WxW51wkjgW2y8yp33HE"}
-      },
       "routes": {
-        "home": {"id": "home", "title":"Home / Agenda", "keys":["rid", "day"], "url":"sites/dc2018/home/home.html", "nav": "home"}
-      },
-      "agenda": {
-        "dec112018": {
-          "order":1, 
-          "events":{
-            "order":1,"time":"8:00am","title":"Discussion of Review Objectives with the Review Committee","instructor":"3J","slides":"" 
-          }
-        } 
+        "home": {"id": "home", "title":"Home / Agenda", "keys":["rid", "day"], "url":"sites/dc2018/home/home.html", "nav": true, "navImage": "<i class='fas fa-home fa-2x'></i>"},
+        "decadalsurveyreport": {"id": "decadalsurveyreport", "title":"Decadal Survey Report", "keys":["rid", "page:decadalsurveyreport"], "url":"sites/dc2018/decadalsurveyreport/decadalsurveyreport.html", "nav": true,"navImage": "<i class='far fa-file-pdf fa-2x'></i>"},
+        "cd3adocuments": {"id": "cd3adocuments", "title":"CD-3A Documents", "keys":["rid", "page:cd3adocuments"], "url":"sites/dc2018/cd3adocuments/cd3adocuments.html", "nav": true,"navImage": "<i class='far fa-folder fa-2x'></i>"},
+        "reviewdocuments": {"id": "reviewdocuments", "title":"Review Documents", "keys":["rid", "page:reviewdocuments"], "url":"sites/dc2018/reviewdocuments/reviewdocuments.html", "nav": true,"navImage": "<i class='far fa-registered fa-2x'></i>"},
+        "logistics": {"id": "logistics", "title":"Logistics", "keys":["rid", "page:logistics"], "url":"sites/dc2018/logistics/logistics.html", "nav": true,"navImage": "<i class='fas fa-gavel fa-2x'></i>"},
+        "reviewinfo": {"id": "reviewinfo", "title":"Review Information", "keys":["rid", "page:reviewinfo"], "url":"sites/dc2018/reviewinfo/reviewinfo.html", "nav": true,"navImage": "<i class='fas fa-info fa-2x'></i>"}
       }
     }
 }

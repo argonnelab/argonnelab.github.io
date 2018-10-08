@@ -2,15 +2,33 @@
   top:60px;
 }
 
+.content-body {
+  padding-left: 200px;
+}
+
 .link {
   color: white !important;
+}
+
+.link:hover {
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .link:visited {
   color: white !important;
 }
 
+.iframe-fill {
+  width: 99%;
+  height: 700px;
+}
 
+
+.border-no-top {
+
+  border-top: 0px white !important;
+}
   
 .bounceball {
   position: relative;
@@ -45,5 +63,17 @@
   }
   100% {
     top: 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .content-body {
+    padding-left: 55px;
+  }
+  .hide-md {
+    display: none !important;;
+  }
+  h2 {
+    font-size: 1.46em !important;
   }
 }

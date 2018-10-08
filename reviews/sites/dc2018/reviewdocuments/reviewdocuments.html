@@ -10,7 +10,7 @@
       </div>
         <div class="row">
           <div class="col">
-              <iframe class="iframe-fill" :src="iframe_src" frameborder="0"></iframe>
+              <iframe id="documents" class="iframe-fill" :src="iframe_src" frameborder="0">Loading...</iframe>
           </div>
         </div>
   </div>
@@ -25,6 +25,33 @@ data: {
 created: function() {
   this.id = '1YFdt2kcA6CmaxjRT0F8blZmopBzjG814';
   this.iframe_src = 'https://drive.google.com/embeddedfolderview?id=' + this.id;
+
+  setTimeout(function() { 
+
+    var iframe = document.querySelector('#documents');
+    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+  console.log(iframeDocument);
+//   $('#documents').contents().find('.flip-entry-info').each(function(i, obj) {
+//     alert('yeah');
+// });
+//     $('.flip-entry-info').each(function(i, obj) {
+//     alert('yeah');
+// });
+    //flip-entry-info
+
+      // $('#documents').load(function(){
+
+      // var iframe = $('#documents').contents();
+
+      // iframe.find(".flip-entry-info").click(function(){
+      //       alert("test");
+      // });
+      // });
+
+
+    // console.log(document.getElementsByClassName('.flip-entry-info'));  
+
+  }, 5000);
 },
 methods: {
   open_library: function(){

@@ -26,8 +26,11 @@ methods: {
     
   },
   load: function(site){
-    this.title = site.title;
-    this.site = site;
+    if (site != undefined) {
+      this.title = site.title;
+      this.site = site;
+    }
+    
   }
 }
 });

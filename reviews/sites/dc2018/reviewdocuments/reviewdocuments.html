@@ -24,34 +24,12 @@ data: {
 },
 created: function() {
   this.id = '1YFdt2kcA6CmaxjRT0F8blZmopBzjG814';
-  this.iframe_src = 'https://drive.google.com/embeddedfolderview?id=' + this.id;
+  this.iframe_src = 'https://drive.google.com/embeddedfolderview?id=' + this.id + '#list';
 
-  setTimeout(function() { 
-
-    var iframe = document.querySelector('#documents');
-    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-  console.log(iframeDocument);
-//   $('#documents').contents().find('.flip-entry-info').each(function(i, obj) {
-//     alert('yeah');
-// });
-//     $('.flip-entry-info').each(function(i, obj) {
-//     alert('yeah');
-// });
-    //flip-entry-info
-
-      // $('#documents').load(function(){
-
-      // var iframe = $('#documents').contents();
-
-      // iframe.find(".flip-entry-info").click(function(){
-      //       alert("test");
-      // });
-      // });
-
-
-    // console.log(document.getElementsByClassName('.flip-entry-info'));  
-
-  }, 5000);
+  $('#documents').on('click', 'a', function() {
+    // do something
+    alert('hello');
+});
 },
 methods: {
   open_library: function(){

@@ -24,6 +24,10 @@
   height: 700px;
 }
 
+.nav-link:hover {
+  cursor: pointer;
+}
+
 
 .border-no-top {
 

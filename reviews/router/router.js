@@ -25,14 +25,10 @@ var Router = (function() {
           loadInitPage();
       }, false);
 
-     
       self.initModules();
       self.initRoutes();
 
-      loadInitPage();
-      
-      // self.loadModule('#pop-placeholder', self.modules.popup);
-      
+      loadInitPage();      
   };
 
   self.initModules = function(){

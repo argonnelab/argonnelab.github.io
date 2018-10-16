@@ -25,8 +25,8 @@
             </div>
 
           <ul class="nav nav-tabs mb-2">
-            <li class="nav-item" v-for="day in agendaDays">
-              <a class="nav-link" v-bind:id="agendas[day].id" @click="showDay(agendas[day])">{{ agendas[day].title }}</a>
+            <li class="nav-item" v-for="date in activeBreakoutSession.dates">
+              <a class="nav-link" :id="getDateAsString(date[0].Date)" @click="showDay(date[0])">{{date[0].Date}}</a>
             </li>
           </ul>
           <div class="ml-3">
@@ -37,15 +37,14 @@
                       <th class="border-no-top">Topic</th>
                       <th class="border-no-top">Location</th>
                       <th class="border-no-top">Speaker</th>
-                      <th class="border-no-top">Slides</th>
                     </tr>
                   </thead>
-                  <tbody v-for="event in agendaActive.events">
-                    <tr>
-                      <td>{{ event.Time }}</td>
+                  <tbody>
+                    <tr v-bind:class="{'no-border': shouldHideLine(event.Time) }" v-for="event in activeAgenda">
+                      <td v-bind:class="{'no-border': shouldHideLine(event.Time) }">{{ event.Time }}</td>
                       <td>{{ event.Topic }}</td>
+                      <td>{{ event.Location }}</td>
                       <td>{{ event.Speaker }}</td>
-                      <td></td>
                     </tr>
                   </tbody>
                 </table>
@@ -65,10 +64,9 @@ data: {
   isLoading: true,
   breakoutSessionSelected: '',
   breakoutSessionOptions: [],
-  data: {},
-  agendaDays: [],
-  agendas: {},
-  agendaActive: {}
+  model: {},
+  activeBreakoutSession: {},
+  activeAgenda: []
 },
 created: function() {
   var self = this;
@@ -78,26 +76,79 @@ created: function() {
   simpleSheet: false
 });
 },
-methods: {
+watch: {
+  breakoutSessionSelected: function(){
+    var self = this;
+    self.activeBreakoutSession = self.model[self.breakoutSessionSelected];
+    var url = window.location.href;
+    url = Router.addToUrl(url, 'session', self.breakoutSessionSelected);
+    Router.pushUrlChange(url);
+    var keys = Object.keys(self.activeBreakoutSession.dates);
+    setTimeout(function() {  self.showDay(self.activeBreakoutSession.dates[keys[0]][0]); }, 200);
+  }
+},
+methods:{ 
+  getDateAsString: function(d){
+    return d.toString().replaceAll("/", "_");
+  },
+  loadBreakoutSession: function(data, sheetName){
+    var self = this;
+    self.model[sheetName] = {};
+    var days = _.groupBy(data.elements, 'Date');
+    self.model[sheetName].dates = days;
+
+
+
+
+    // _.forEach(data.elements, function(d){
+    //   if (d.Date != '' && currentDate != d.Date){
+    //     currentDate = d.Date;
+    //     self.model[sheetName].dates.push(currentDate);
+    //   }
+
+    //   // self.model[sheetName].events.push({
+    //   //   date: d.Date,
+    //   //   time: d.Time,
+    //   //   topic: d.Topic,
+    //   //   location: d.Location,
+    //   //   speaker: d.Speaker
+    //   // });
+    // });
+
+  },
+  throwError: function(message){
+
+  },
+  shouldHideLine: function(time){
+    if (time == ''){
+      return true;
+    } else {
+      return false;
+    }
+  },
   showInfo: function(data, tabletop) {
     var self = this;
-    self.data = data;
-    
+
     var cont = true;
 
     if (data.Info == undefined){
       cont = false;
-      throwError('Info Sheet is missing from Excel file!');
+      self.throwError('Info Sheet is missing from Excel file!');
     } else {
       _.forEach(data.Info.elements, function(modelInfo){
-        console.log(modelInfo);
         self.breakoutSessionOptions.push({ value: modelInfo.Sheet, text: modelInfo.Sheet + ' - ' + modelInfo.Title });
+        self.loadBreakoutSession(data[modelInfo.Sheet], modelInfo.Sheet);
       });
-    }
 
-    if (cont){
-
+      var session = Router.getUrlParameter('session');
+      if (session == undefined){
+        session = self.breakoutSessionOptions[0].value;
+      }
+      self.breakoutSessionSelected = session;
     }
+    
+  
+  
 
 
 //var days = _.groupBy(data, 'Day');
@@ -132,18 +183,25 @@ methods: {
   },
   showDay: function(day){
     var self = this;
-    if (!_.isEmpty(self.agendaActive)){
-      $('#' + self.agendaActive.id).removeClass('active');
-    }
+      _.forEach(self.activeBreakoutSession.dates, function(b){
+        $('#' + self.getDateAsString(b[0].Date)).removeClass('active');
+      });
+      
+      $('#' + self.getDateAsString(day.Date)).addClass('active');
+
+      self.activeAgenda = self.activeBreakoutSession.dates[day.Date];
+    // if (!_.isEmpty(self.agendaActive)){
+    //   $('#' + self.agendaActive.id).removeClass('active');
+    // }
    
-    $('#' + day.id).addClass('active');
-    self.agendaActive = day;
+    // $('#' + day.id).addClass('active');
+    // self.agendaActive = day;
 
-    var url = Router.convertRouteToUrl(Router.activeRoute);
-    url = Router.addToUrl(url, Constants.DAY_QS_PARAM, day.title);
-    Router.pushUrlChange(url);
+    // var url = Router.convertRouteToUrl(Router.activeRoute);
+    // url = Router.addToUrl(url, Constants.DAY_QS_PARAM, day.title);
+    // Router.pushUrlChange(url);
 
-    self.isLoading = false;
+    // self.isLoading = false;
   }
 
 }
@@ -151,6 +209,9 @@ methods: {
 </script>
 
 <style>
+.no-border {
+  border: none !important;
+}
 .tab {
     overflow: hidden;
     border: 1px solid #ccc;

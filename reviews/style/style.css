@@ -1,3 +1,7 @@
+body {
+  font-size: .85rem;
+}
+
 #content-placeholder {
   top:60px;
 }

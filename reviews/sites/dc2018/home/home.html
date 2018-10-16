@@ -2,8 +2,6 @@
 
 <div class="content-body" id="home-app">
   <div class="container-fluid">
-      <h3 class="mt-1 mb-4">Agenda</h3>
-
       <div class="row" v-if="isLoading">
           <div class="col-12">
               <div>
@@ -17,6 +15,17 @@
           </div>
       </div>
       <div v-show="!isLoading">
+          <div class="row ml-2 mb-4">
+              <div class="col">
+                  <div class="pt-2"><h2 class="mb-0">Agenda</h2></div>
+              </div>
+              <div class="alert alert-primary col-auto align-self-end mt-2 mr-2">
+                  <div class="row">
+                      <div class="col-auto pl-0"><strong>Breakout Session:</strong><b-form-select v-model="breakoutSessionSelected" :options="breakoutSessionOptions" /></div>
+                    </div>
+              </div>
+            </div>
+
           <ul class="nav nav-tabs mb-2">
             <li class="nav-item" v-for="day in agendaDays">
               <a class="nav-link" v-bind:id="agendas[day].id" @click="showDay(agendas[day])">{{ agendas[day].title }}</a>
@@ -28,6 +37,7 @@
                     <tr class="border-no-top">
                       <th class="border-no-top">Time</th>
                       <th class="border-no-top">Topic</th>
+                      <th class="border-no-top">Location</th>
                       <th class="border-no-top">Speaker</th>
                       <th class="border-no-top">Slides</th>
                     </tr>
@@ -55,6 +65,9 @@ new Vue({
 el: '#home-app',
 data: {
   isLoading: true,
+  breakoutSessionSelected: '',
+  breakoutSessionOptions: [],
+  data: {},
   agendaDays: [],
   agendas: {},
   agendaActive: {}
@@ -62,41 +75,61 @@ data: {
 created: function() {
   var self = this;
   var tabletop = Tabletop.init({ 
-  key: '1UlpEntHaNt9PQqBdlJ5i6UxrCsP--m6q3SkgJXRySf0', 
+  key: '1iLSmJFqs9F5gD31fx2I6xEV4mo9xmgvp9vAF5xBqv2Y', 
   callback: self.showInfo,
-  simpleSheet: true
+  simpleSheet: false
 });
 },
 methods: {
   showInfo: function(data, tabletop) {
     var self = this;
-    var days = _.groupBy(data, 'Day');
-    var daySelection = Router.activeRoute.params.day;
-    var activeDay = undefined;
+    self.data = data;
+    
+    var cont = true;
 
-    _.forEach(days, function(value, key) {
-        var title = key;
-        key = key.replace(/\//g, '');
+    if (data.Info == undefined){
+      cont = false;
+      throwError('Info Sheet is missing from Excel file!');
+    } else {
+      _.forEach(data.Info.elements, function(modelInfo){
+        console.log(modelInfo);
+        self.breakoutSessionOptions.push({ value: modelInfo.Sheet, text: modelInfo.Sheet + ' - ' + modelInfo.Title });
+      });
+    }
 
-        self.agendaDays.push(key);
-        self.agendas[key] = {};
-        self.agendas[key].id = key;
-        self.agendas[key].title = title;
+    if (cont){
+
+    }
+
+
+//var days = _.groupBy(data, 'Day');
+
+    // var daySelection = Router.activeRoute.params.day;
+    // var activeDay = undefined;
+
+    // _.forEach(days, function(value, key) {
+    //     var title = key;
+    //     key = key.replace(/\//g, '');
+
+    //     self.agendaDays.push(key);
+    //     self.agendas[key] = {};
+    //     self.agendas[key].id = key;
+    //     self.agendas[key].title = title;
         
-        self.agendas[key].events = {};
-        self.agendas[key].events = value;
-        if (title == daySelection) {
-         activeDay = self.agendas[key];
-        }
+    //     self.agendas[key].events = {};
+    //     self.agendas[key].events = value;
+    //     if (title == daySelection) {
+    //      activeDay = self.agendas[key];
+    //     }
 
-        if (activeDay == undefined){
-          activeDay = self.agendas[key];
-        }
-    });
+    //     if (activeDay == undefined){
+    //       activeDay = self.agendas[key];
+    //     }
+    // });
 
-    setTimeout(function() { self.showDay(activeDay); }, 300);
+    // setTimeout(function() { self.showDay(activeDay); }, 300);
     
-    
+    self.isLoading = false;
     
   },
   showDay: function(day){

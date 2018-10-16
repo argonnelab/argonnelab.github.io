@@ -1,14 +1,21 @@
 body {
   font-size: .85rem;
-  background-color: white;
+  background-color: #161925;
 }
 
+.fill-page {
+  height: 100%;
+}
 #index-app {
   position: relative;
 }
 
 #content-placeholder {
   top:60px;
+  
+}
+
+.container-fluid {
   background-color: white;
 }
 
@@ -38,9 +45,12 @@ body {
   cursor: pointer;
 }
 
+.loadingHeight {
+  height: 1000px;
+}
+
 
 .border-no-top {
-
   border-top: 0px white !important;
 }
   

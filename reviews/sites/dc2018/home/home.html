@@ -2,9 +2,7 @@
 
 <div class="content-body" id="home-app">
   <div class="container-fluid">
-      <div class="row" v-if="isLoading">
-          <div class="col-12">
-              <div>
+              <div class="loadingHeight" v-if="isLoading">
                   <div class="wrap">
                   <div class="loading">
                       <div class="bounceball"></div>
@@ -12,8 +10,6 @@
                   </div>
                   </div>
               </div>
-          </div>
-      </div>
       <div v-show="!isLoading">
           <div class="row ml-2 mb-4 mr-2">
               <div class="col">
@@ -51,8 +47,6 @@
           </div>
          
       </div>
-
-      
   </div>
 
 </div>

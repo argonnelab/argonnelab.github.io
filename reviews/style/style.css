@@ -41,6 +41,10 @@ body {
   height: 700px;
 }
 
+/* doesn't work... */
+iframe::-webkit-scrollbar {  
+  display: none;
+} 
 .nav-link:hover {
   cursor: pointer;
 }

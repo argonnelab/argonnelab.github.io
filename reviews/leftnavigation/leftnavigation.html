@@ -1,7 +1,16 @@
 <div id="leftnavigation-app">
-  <div class="left-nav">
-    <ul class="nav-ul" v-for="nav in navItems">
-        <li @click="routeTo(nav)" :title="nav.title" class="navItem" v-bind:class="{'navItem-active': nav.isActive }">
+  <div id="topnavigation" class="top-nav">
+      <ul class="top-nav-ul">
+          <li v-for="nav in navItems" @click="routeTo(nav)" :title="nav.title" class="top-navItem" v-bind:class="{'top-navItem-active': nav.isActive }">
+            <a>
+              <div class="mr-1" v-html="nav.navImage"></div>
+            </a>
+          </li>
+      </ul>
+  </div>
+  <div id="leftnavigation" class="left-nav">
+    <ul class="nav-ul">
+        <li v-for="nav in navItems" @click="routeTo(nav)" :title="nav.title" class="navItem" v-bind:class="{'navItem-active': nav.isActive }">
           <a>
             <div class="mb-1" v-html="nav.navImage"></div>
             <div class="hide-md">{{nav.title}}</div>
@@ -57,16 +66,66 @@ methods: {
 
 <style>
 
-.nav-ul {
+  .top-nav {
+    top:50px;
+    left:0px;
+    height:60px;
+    width: 100%;
+    display: none;
+  }
+
+  .top-nav-ul {
+  margin-top: 2px;
+  text-align: center; 
+  }
+
+  .top-navItem {
+  color: #F8F8F8 !important;
+  letter-spacing: 0.3px;
+  font-size: 14px;
+  font-weight: lighter;
+  background-color:#161925;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: pointer;
+  border-radius: 10px;
+
+  padding-top: 8px;
+  padding-bottom: 8px;
   padding-left: 5px;
-  text-align: center;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  margin-bottom: 12px;
+  margin-right: 15px;
+  display: inline-block;
+  width: 55px;
 }
 
-#leftnavigation-app {
-left: 0px;
-position: absolute;
-height: 100%;
+.top-navItem:hover {
+  background-color: #235789 !important;
+}
 
+.top-navItem-active {
+  background-color: #BF4E30 !important;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  font-weight: bold;
+}
+
+.nav-ul {
+  margin-top: 10px;
+  padding-left: 5px;
+  text-align: center;
+  
+}
+
+#leftnavigation {
+left: 0px;
+top: 60px;
+height: 100%;
+position: fixed;
 margin-right: 15px;
 }
 
@@ -95,6 +154,7 @@ text-decoration: none;
   border-left: 1px solid white;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
+  margin-bottom: 12px;
 }
 
 .navItem > a > div {
@@ -116,15 +176,25 @@ text-decoration: none;
 .left-nav {
   background-color: #161925;
   height: 100%;
-  position: relative;
-  top: 0px;
-  padding-top: 8px;
   width: 200px;
 }
 
 @media (max-width: 992px) {
-.left-nav {
-  width: 55px;
+  .left-nav {
+    width: 55px;
+  }
 }
+
+@media (max-width: 768px) {
+  #leftnavigation {
+    display: none;
+  }
+
+  .top-nav {
+    display: block;
+  }
+
 }
+
+
 </style>

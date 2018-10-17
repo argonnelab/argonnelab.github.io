@@ -60,8 +60,8 @@ body {
     height: 55px;
   }
   #header-placeholder {
-  position: absolute;
-  top: 0px;
+    position: absolute;
+    top: 0px;
   }
 
    #content-placeholder {
@@ -178,5 +178,8 @@ iframe::-webkit-scrollbar {
 @media (max-width: 768px) {
   .content-body {
     padding-left: 5px;
+  }
+  h2 {
+    font-size: 1.10em !important;
   }
 }

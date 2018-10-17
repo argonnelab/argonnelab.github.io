@@ -6,6 +6,16 @@ body {
   height: 100%;
 }
 
+.skinny {
+  padding: 0px 10px 0px 10px !important;
+  margin-bottom: 0px !important;
+  border-width: 1px 1px 1px 1px !important;
+}
+
+.skinny-rounded {
+  border-radius: 7px !important;
+}
+
 #header-placeholder {
   position: fixed;
   top: 0px;

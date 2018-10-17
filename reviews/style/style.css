@@ -52,7 +52,7 @@ body {
   }
   
   #content-placeholder {
-    padding-left: 65px;
+    padding-left: 15px;
   }
 
   .hide-md {
@@ -76,7 +76,6 @@ body {
 
    #content-placeholder {
     padding-left: 10px;
-    padding-top: 100px;
   }
 }
 

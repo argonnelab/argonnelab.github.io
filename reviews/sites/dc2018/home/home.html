@@ -37,8 +37,8 @@
                   </thead>
                   <tbody>
                     <tr v-bind:class="{'no-border': shouldHideLine(event.Time) }" v-for="event in activeAgenda">
-                      <td class="nowrap" v-bind:class="{'no-border': shouldHideLine(event.Time) }">{{ event.Time }}</td>
-                      <td><span v-bind:class="{'alert-primary skinny skinny-rounded': event.Session != 'All' }">{{ event.Topic }}</span></td>
+                      <td class="nowrap" v-bind:class="{'no-border': shouldHideLine(event.Time) }"><span v-bind:class="{'alert-primary skinny skinny-rounded': event.Session != 'All' }">{{ event.Time }}</span></td>
+                      <td>{{ event.Topic }}</td>
                       <td>{{ event.Location }}</td>
                       <td>{{ event.Speaker }}</td>
                     </tr>

@@ -1,14 +1,4 @@
 <div id="leftnavigation-app">
-  <div id="topnavigation" class="top-nav">
-      <ul class="top-nav-ul">
-          <li v-for="nav in navItems" @click="routeTo(nav)" :title="nav.title" class="top-navItem" v-bind:class="{'top-navItem-active': nav.isActive }">
-            <a>
-              <div class="mr-1" v-html="nav.navImage"></div>
-            </a>
-          </li>
-      </ul>
-  </div>
-  <div id="leftnavigation" class="left-nav">
     <ul class="nav-ul">
         <li v-for="nav in navItems" @click="routeTo(nav)" :title="nav.title" class="navItem" v-bind:class="{'navItem-active': nav.isActive }">
           <a>
@@ -17,7 +7,6 @@
           </a>
         </li>
     </ul>
-  </div>
 </div>
   
 <script>
@@ -65,7 +54,7 @@ methods: {
 </script>
 
 <style>
-  .top-nav {
+  /* .top-nav {
     top:50px;
     left:0px;
     height:60px;
@@ -109,29 +98,30 @@ methods: {
   border-bottom: 1px solid white;
   font-weight: bold;
 }
+*/
 
 .nav-ul {
   margin-top: 10px;
   padding-left: 5px;
   text-align: center;
   
-}
+} 
 
-#leftnavigation {
+/* #leftnavigation {
 left: 0px;
 
 position: fixed;
-/* background-color:#161925; */
-}
+} */
 
 .navImg {
-max-width: 30px;
+  max-width: 30px;
 }
 
 .navItem a {
 text-decoration: none;
 
 }
+
 
 .navItem {
   color: #F8F8F8 !important;
@@ -168,29 +158,39 @@ text-decoration: none;
   font-weight: bold;
 }
 
+/* 
+
 .left-nav {
-  /* background-color: #161925; */
   width: 200px;
 }
 
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .left-nav {
     width: 55px;
   }
-}
+} */
 
 @media (max-width: 768px) {
-  #leftnavigation {
+  .navItem {
+    width: 52px;
+    border-radius: 10px;
+    border: 1px solid white;
+    display: inline-block;
+    margin-right: 10px;
+    padding-bottom: 4px;
+  }
+
+  /* #leftnavigation {
     display: none;
-  }
+  } */
 
-  .top-nav {
+  /* .top-nav {
     display: block;
-  }
+  } */
 
-  .container-fluid {
+  /* .container-fluid {
     padding-left: 0px !important;
-  }
+  } */
 
 }
 

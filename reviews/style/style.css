@@ -1,27 +1,92 @@
 body {
   font-size: .85rem;
-  background-color: #161925;
 }
 
 .fill-page {
   height: 100%;
 }
-#index-app {
+
+#header-placeholder {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  background-color: #161925;
+  z-index: 2;
+}
+
+#leftnavigation-placeholder {
+  position: fixed;
+  top: 50px;  /* Using px here is better I think */
+  bottom: 0px;
+  left: 0px;
+  width: 200px;
+  background-color: #161925;
+  z-index: 2;
+}
+
+#content-placeholder {
+  position: relative;
+  width: 100%;
+  padding-top: 60px;
+  padding-left: 210px;
+  padding-right: 10px; 
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+@media (max-width: 992px) {
+  #leftnavigation-placeholder {
+    width: 55px;
+  }
+  
+  #content-placeholder {
+    padding-left: 65px;
+  }
+
+  .hide-md {
+    display: none !important;;
+  }
+  h2 {
+    font-size: 1.46em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #leftnavigation-placeholder {
+    position: relative;
+    width: 100%;
+    height: 55px;
+  }
+  #header-placeholder {
+  position: absolute;
+  top: 0px;
+  }
+
+   #content-placeholder {
+    padding-left: 10px;
+    padding-top: 100px;
+  }
+}
+
+
+/* #index-app {
   position: relative;
 }
 
 #content-placeholder {
   top:60px;
   
-}
+} */
 
-.container-fluid {
+/* .container-fluid {
   background-color: white;
-}
+} */
 
-.content-body {
+/* .content-body {
   padding-left: 200px;
-}
+} */
 
 .link {
   color: white !important;

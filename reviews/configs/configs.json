@@ -6,7 +6,7 @@
       "description": "[ Description goes here ]",
       "dates": "December 11-13 of 2018",
       "routes": {
-        "home": {"id": "home", "title":"Home / Agenda", "keys":["rid", "day"], "url":"sites/dc2018/home/home.html?rev=1", "nav": true, "navImage": "<i class='fas fa-home fa-2x'></i>"},
+        "home": {"id": "home", "title":"Home / Agenda", "keys":["rid", "session", "date"], "url":"sites/dc2018/home/home.html?rev=1", "nav": true, "navImage": "<i class='fas fa-home fa-2x'></i>"},
         "decadalsurveyreport": {"id": "decadalsurveyreport", "title":"Decadal Survey Report", "keys":["rid", "page:decadalsurveyreport"], "url":"sites/dc2018/decadalsurveyreport/decadalsurveyreport.html", "nav": true,"navImage": "<i class='far fa-file-pdf fa-2x'></i>"},
         "reviewdocuments": {"id": "reviewdocuments", "title":"Review Documents", "keys":["rid", "page:reviewdocuments"], "url":"sites/dc2018/reviewdocuments/reviewdocuments.html", "nav": true,"navImage": "<i class='far fa-registered fa-2x'></i>"},
         "logistics": {"id": "logistics", "title":"Logistics", "keys":["rid", "page:logistics"], "url":"sites/dc2018/logistics/logistics.html", "nav": true,"navImage": "<i class='fas fa-gavel fa-2x'></i>"},

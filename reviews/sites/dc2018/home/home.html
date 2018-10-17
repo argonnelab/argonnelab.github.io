@@ -78,7 +78,21 @@ watch: {
     url = Router.addToUrl(url, 'session', self.breakoutSessionSelected);
     Router.pushUrlChange(url);
     var keys = Object.keys(self.activeBreakoutSession.dates);
-    setTimeout(function() {  self.showDay(self.activeBreakoutSession.dates[keys[0]][0]); }, 200);
+    
+    var date = Router.getUrlParameter('date');
+    if (date == undefined){
+      date = self.activeBreakoutSession.dates[keys[0]][0];
+    } else {
+      var matchedDates = _.find(keys, function(k){ return k == date;});
+
+      if (matchedDates == undefined){
+        date = self.activeBreakoutSession.dates[keys[0]][0];
+      } else {
+        date = self.activeBreakoutSession.dates[date][0];
+      }
+    }
+    //self.activeBreakoutSession.dates[keys[0]][0]
+    setTimeout(function() {  self.showDay(date); }, 200);
   }
 },
 methods:{ 
@@ -90,24 +104,6 @@ methods:{
     self.model[sheetName] = {};
     var days = _.groupBy(data.elements, 'Date');
     self.model[sheetName].dates = days;
-
-
-
-
-    // _.forEach(data.elements, function(d){
-    //   if (d.Date != '' && currentDate != d.Date){
-    //     currentDate = d.Date;
-    //     self.model[sheetName].dates.push(currentDate);
-    //   }
-
-    //   // self.model[sheetName].events.push({
-    //   //   date: d.Date,
-    //   //   time: d.Time,
-    //   //   topic: d.Topic,
-    //   //   location: d.Location,
-    //   //   speaker: d.Speaker
-    //   // });
-    // });
 
   },
   throwError: function(message){
@@ -122,7 +118,6 @@ methods:{
   },
   showInfo: function(data, tabletop) {
     var self = this;
-
     var cont = true;
 
     if (data.Info == undefined){
@@ -137,43 +132,16 @@ methods:{
       var session = Router.getUrlParameter('session');
       if (session == undefined){
         session = self.breakoutSessionOptions[0].value;
+      } else {
+        var matchedSession = _.find(self.breakoutSessionOptions, function(b){ return b.value == session.toUpperCase();});
+        if (matchedSession == undefined){
+          session = self.breakoutSessionOptions[0].value;
+        } else {
+          session = matchedSession.value;
+        }
       }
       self.breakoutSessionSelected = session;
     }
-    
-  
-  
-
-
-//var days = _.groupBy(data, 'Day');
-
-    // var daySelection = Router.activeRoute.params.day;
-    // var activeDay = undefined;
-
-    // _.forEach(days, function(value, key) {
-    //     var title = key;
-    //     key = key.replace(/\//g, '');
-
-    //     self.agendaDays.push(key);
-    //     self.agendas[key] = {};
-    //     self.agendas[key].id = key;
-    //     self.agendas[key].title = title;
-        
-    //     self.agendas[key].events = {};
-    //     self.agendas[key].events = value;
-    //     if (title == daySelection) {
-    //      activeDay = self.agendas[key];
-    //     }
-
-    //     if (activeDay == undefined){
-    //       activeDay = self.agendas[key];
-    //     }
-    // });
-
-    // setTimeout(function() { self.showDay(activeDay); }, 300);
-    
-    self.isLoading = false;
-    
   },
   showDay: function(day){
     var self = this;
@@ -184,18 +152,13 @@ methods:{
       $('#' + self.getDateAsString(day.Date)).addClass('active');
 
       self.activeAgenda = self.activeBreakoutSession.dates[day.Date];
-    // if (!_.isEmpty(self.agendaActive)){
-    //   $('#' + self.agendaActive.id).removeClass('active');
-    // }
-   
-    // $('#' + day.id).addClass('active');
-    // self.agendaActive = day;
+ 
 
-    // var url = Router.convertRouteToUrl(Router.activeRoute);
-    // url = Router.addToUrl(url, Constants.DAY_QS_PARAM, day.title);
-    // Router.pushUrlChange(url);
+    var url = window.location.href;
+    url = Router.addToUrl(url, 'date', day.Date);
+    Router.pushUrlChange(url);
 
-    // self.isLoading = false;
+    self.isLoading = false;
   }
 
 }

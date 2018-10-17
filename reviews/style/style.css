@@ -80,9 +80,9 @@ body {
   
 } */
 
-/* .container-fluid {
-  background-color: white;
-} */
+.container-fluid {
+  padding-left: 0px;
+}
 
 /* .content-body {
   padding-left: 200px;
@@ -99,6 +99,10 @@ body {
 
 .link:visited {
   color: white !important;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .iframe-fill {

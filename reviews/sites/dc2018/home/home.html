@@ -47,7 +47,12 @@
                             {{ event.Time }}
                         </span>
                       </td>
-                      <td>{{ event.Topic }}</td>
+                      <td>
+                        <span v-if="event.Topic_ID != ''">
+                            <a :href="event.Link" target="_blank">{{event.Topic_ID }}</a> -
+                        </span> 
+                            {{ event.Topic }}
+                      </td>
                       <td>{{ event.Location }}</td>
                       <td>{{ event.Speaker }}</td>
                     </tr>
@@ -161,7 +166,8 @@ methods:{
       $('#' + self.getDateAsString(day.Date)).addClass('active');
 
       self.activeAgenda = self.activeBreakoutSession.dates[day.Date];
- 
+      
+      console.log(self.activeAgenda);
 
     var url = window.location.href;
     url = Router.addToUrl(url, 'date', day.Date);

@@ -1,5 +1,6 @@
 
-
+<script src="vendors/pdfmake/pdfmake.min.js"></script>
+<script src="vendors/pdfmake/vfs_fonts.js"></script>
 <div class="content-body" id="home-app">
   <div class="container-fluid">
               <div class="loadingHeight" v-if="isLoading">
@@ -16,7 +17,7 @@
                   <div class="pt-2"><h2 class="mb-0">Agenda</h2></div>
               </div>
               <div class="alert alert-primary col-auto align-self-end mt-2 w-100">
-                  <div class="col-auto pl-0"><strong>Breakout Session:</strong><b-form-select v-model="breakoutSessionSelected" :options="breakoutSessionOptions" /></div>
+                  <div class="col-auto pl-0"><strong>Breakout Session:</strong><b-link class="ml-3" @click.prevent="download">Download</b-link><b-form-select v-model="breakoutSessionSelected" :options="breakoutSessionOptions" /></div>
               </div>
             </div>
 
@@ -110,6 +111,59 @@ watch: {
   }
 },
 methods:{ 
+  download: function(){
+    var self = this;
+
+    var session = _.find(self.breakoutSessionOptions, function(b){ return b.value == self.breakoutSessionSelected;});
+
+    var content = [];
+    content.push({text: session.text, style: 'header'});
+    
+    _.forOwn(self.activeBreakoutSession.dates, function(value, key) {
+      content.push({text: 'Date: ' + key, style: 'subheader'});
+        var datebody =  [];
+        datebody.push(['Time', 'Topic Id', 'Topic', 'Location', 'Speaker' ]);
+
+        _.forEach(value, function(v){
+          datebody.push([ v.Time, v.Topic_ID, v.Topic, v.Location, v.Speaker ]);
+        });
+       
+        content.push(
+          {
+            table: {
+              headerRows: 1,
+              widths: [ 100, 'auto', '*', 'auto', 'auto' ],
+              body: datebody
+            }
+          }
+        );
+      });
+    
+    var docDefinition = { 
+      content: content,
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10]
+        },
+        subheader: {
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 0, 5]
+        },
+        tableExample: {
+          margin: [0, 5, 0, 15]
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 13,
+          color: 'black'
+        }
+      }
+    };
+    pdfMake.createPdf(docDefinition).download();
+  },
   getDateAsString: function(d){
     return d.toString().replaceAll("/", "_");
   },
@@ -159,46 +213,43 @@ methods:{
   },
   showDay: function(day){
     var self = this;
-      _.forEach(self.activeBreakoutSession.dates, function(b){
-        $('#' + self.getDateAsString(b[0].Date)).removeClass('active');
-      });
-      
-      $('#' + self.getDateAsString(day.Date)).addClass('active');
+    _.forEach(self.activeBreakoutSession.dates, function(b){
+      $('#' + self.getDateAsString(b[0].Date)).removeClass('active');
+    });
+    
+    $('#' + self.getDateAsString(day.Date)).addClass('active');
 
-      self.activeAgenda = self.activeBreakoutSession.dates[day.Date];
-      
-      console.log(self.activeAgenda);
-
+    self.activeAgenda = self.activeBreakoutSession.dates[day.Date];
+  
     var url = window.location.href;
     url = Router.addToUrl(url, 'date', day.Date);
     Router.pushUrlChange(url);
 
     self.isLoading = false;
   }
-
 }
 });
 </script>
 
 <style>
-.no-border {
-  border: none !important;
-}
-.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-}
+  .no-border {
+    border: none !important;
+  }
+  .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+  }
 
-.custom-select {
-  display: block;
-  font-size: .95em;
-}
-
-@media (max-width: 768px) {
   .custom-select {
-  display: block;
-  font-size: .85em;
-}
-}
+    display: block;
+    font-size: .95em;
+  }
+
+  @media (max-width: 768px) {
+    .custom-select {
+    display: block;
+    font-size: .85em;
+  }
+  }
 </style>

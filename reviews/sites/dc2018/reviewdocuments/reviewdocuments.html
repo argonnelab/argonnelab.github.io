@@ -18,17 +18,11 @@
 new Vue({
 el: '#reviewdocuments-app',
 data: {
-  id: '',
+  id: '1YFdt2kcA6CmaxjRT0F8blZmopBzjG814',
   iframe_src: ''
 },
 created: function() {
-  this.id = '1YFdt2kcA6CmaxjRT0F8blZmopBzjG814';
   this.iframe_src = 'https://drive.google.com/embeddedfolderview?id=' + this.id + '#list';
-
-  $('#documents').on('click', 'a', function() {
-    // do something
-    alert('hello');
-});
 },
 methods: {
   open_library: function(){

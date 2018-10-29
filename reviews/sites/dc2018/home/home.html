@@ -12,14 +12,26 @@
                   </div>
               </div>
       <div v-show="!isLoading">
-          <div class="row ml-2 mb-4 mr-2">
-              <div class="col">
-                  <div class="pt-2"><h2 class="mb-0">Agenda</h2></div>
-              </div>
-              <div class="alert alert-primary col-auto align-self-end mt-2 w-100">
-                  <div class="col-auto pl-0"><strong>Breakout Session:</strong><b-link class="ml-3" @click.prevent="download">Download</b-link><b-form-select v-model="breakoutSessionSelected" :options="breakoutSessionOptions" /></div>
-              </div>
+          <div class="row">
+            <div class="col">
+                <span class="h2 mt-1 mb-0">Agenda</span>
             </div>
+            <div class="col-auto mt-3">
+                <i class="fas fa-file-download">
+                  <a href="https://drive.google.com/uc?export=download&id=1u6pW86jQGGTRoCgTa8LT-Nr3MrHSUpaF" target="_blank">
+                    <span class="ml-1">Download pdf version</span>
+                  </a>
+                </i>
+            </div>
+          </div>
+          
+          <div class="row ml-1 mb-4 mr-1">
+              <div class="col pt-2">
+                  <div class="alert alert-primary align-self-end mt-2 w-100">
+                      <div class="col-auto pl-0"><strong>Breakout Session:</strong><b-form-select class="inline" v-model="breakoutSessionSelected" :options="breakoutSessionOptions" /></div>
+                  </div>
+              </div>
+          </div>
 
           <ul class="nav nav-tabs mb-2">
             <li class="nav-item" v-for="date in activeBreakoutSession.dates">
@@ -113,56 +125,56 @@ watch: {
 methods:{ 
   download: function(){
     var self = this;
+    var downloadLink = ''
+    // var session = _.find(self.breakoutSessionOptions, function(b){ return b.value == self.breakoutSessionSelected;});
 
-    var session = _.find(self.breakoutSessionOptions, function(b){ return b.value == self.breakoutSessionSelected;});
-
-    var content = [];
-    content.push({text: session.text, style: 'header'});
+    // var content = [];
+    // content.push({text: session.text, style: 'header'});
     
-    _.forOwn(self.activeBreakoutSession.dates, function(value, key) {
-      content.push({text: 'Date: ' + key, style: 'subheader'});
-        var datebody =  [];
-        datebody.push(['Time', 'Topic Id', 'Topic', 'Location', 'Speaker' ]);
+    // _.forOwn(self.activeBreakoutSession.dates, function(value, key) {
+    //   content.push({text: 'Date: ' + key, style: 'subheader'});
+    //     var datebody =  [];
+    //     datebody.push(['Time', 'Topic Id', 'Topic', 'Location', 'Speaker' ]);
 
-        _.forEach(value, function(v){
-          datebody.push([ v.Time, v.Topic_ID, v.Topic, v.Location, v.Speaker ]);
-        });
+    //     _.forEach(value, function(v){
+    //       datebody.push([ v.Time, v.Topic_ID, v.Topic, v.Location, v.Speaker ]);
+    //     });
        
-        content.push(
-          {
-            table: {
-              headerRows: 1,
-              widths: [ 100, 'auto', '*', 'auto', 'auto' ],
-              body: datebody
-            }
-          }
-        );
-      });
+    //     content.push(
+    //       {
+    //         table: {
+    //           headerRows: 1,
+    //           widths: [ 100, 'auto', '*', 'auto', 'auto' ],
+    //           body: datebody
+    //         }
+    //       }
+    //     );
+    //   });
     
-    var docDefinition = { 
-      content: content,
-      styles: {
-        header: {
-          fontSize: 18,
-          bold: true,
-          margin: [0, 0, 0, 10]
-        },
-        subheader: {
-          fontSize: 16,
-          bold: true,
-          margin: [0, 10, 0, 5]
-        },
-        tableExample: {
-          margin: [0, 5, 0, 15]
-        },
-        tableHeader: {
-          bold: true,
-          fontSize: 13,
-          color: 'black'
-        }
-      }
-    };
-    pdfMake.createPdf(docDefinition).download();
+    // var docDefinition = { 
+    //   content: content,
+    //   styles: {
+    //     header: {
+    //       fontSize: 18,
+    //       bold: true,
+    //       margin: [0, 0, 0, 10]
+    //     },
+    //     subheader: {
+    //       fontSize: 16,
+    //       bold: true,
+    //       margin: [0, 10, 0, 5]
+    //     },
+    //     tableExample: {
+    //       margin: [0, 5, 0, 15]
+    //     },
+    //     tableHeader: {
+    //       bold: true,
+    //       fontSize: 13,
+    //       color: 'black'
+    //     }
+    //   }
+    // };
+    // pdfMake.createPdf(docDefinition).download();
   },
   getDateAsString: function(d){
     return d.toString().replaceAll("/", "_");

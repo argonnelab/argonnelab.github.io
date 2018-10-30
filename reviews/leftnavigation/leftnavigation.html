@@ -29,9 +29,14 @@ methods: {
   routeTo: function(route){
     var self = this;
     if (self.activeNavName != route.id){
-      route.params.rid = self.rid;
-      self.setActive(route);
-      Router.loadMainToRoute(route, false);
+      if (route.externalLink == undefined){
+        route.params.rid = self.rid;
+        self.setActive(route);
+        Router.loadMainToRoute(route, false);
+      } else {
+        window.open(route.url, "_blank");
+      }
+
     }
   },
   setActive: function(route){

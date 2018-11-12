@@ -30,9 +30,11 @@ methods: {
     var self = this;
     if (self.activeNavName != route.id){
       if (route.externalLink == undefined){
-        route.params.rid = self.rid;
-        self.setActive(route);
-        Router.loadMainToRoute(route, false);
+        if (route.url != ''){
+          route.params.rid = self.rid;
+          self.setActive(route);
+          Router.loadMainToRoute(route, false);
+        }
       } else {
         window.open(route.url, "_blank");
       }

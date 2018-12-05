@@ -28,8 +28,9 @@ methods: {
   },
   routeTo: function(route){
     var self = this;
+    console.log(route);
     if (self.activeNavName != route.id){
-      if (route.externalLink == undefined){
+      if (route.externallink == undefined){
         if (route.url != ''){
           route.params.rid = self.rid;
           self.setActive(route);

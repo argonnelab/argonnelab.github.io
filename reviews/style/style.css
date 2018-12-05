@@ -149,6 +149,9 @@ iframe::-webkit-scrollbar {
   height: 1000px;
 }
 
+.f-sm {
+  font-size: 15px;
+}
 
 .border-no-top {
   border-top: 0px white !important;

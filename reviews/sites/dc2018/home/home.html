@@ -38,9 +38,9 @@
           <div class="row ml-1 mb-4 mr-1">
             <div class="col">
               <div class="alert alert-success skinny">
-                <a href="https://www.uberconference.com/cmbs4a(866-578-4799)" target="_blank">
+                <a href="https://www.uberconference.com/cmbs4a" target="_blank">
                     <i class="fas fa-phone-square"></i>
-                        <span class="ml-1 pb-2 f-sm"><b>Teleconference Connection</b>  <i>(join remotely)</i></span>
+                        <span class="ml-1 pb-2 f-sm"><b>Teleconference Connection</b>  <i>(Auditorium) #866-578-4799</i></span>
                     </i>
                 </a>
               </div>
@@ -80,7 +80,12 @@
                         </span> 
                             {{ event.Topic }}
                       </td>
-                      <td>{{ event.Location }}</td>
+                      <td>
+                        <span v-if="event.Location == 'UCDC Auditorium'" class="mr-2">
+                          <a href="https://www.uberconference.com/cmbs4a" target="_blank">
+                            <i class="fas fa-phone-square"></i>
+                        </a>
+                  </span>{{ event.Location }}</td>
                       <td>{{ event.Speaker }}</td>
                     </tr>
                   </tbody>

@@ -28,13 +28,24 @@
             </div>
           </div>
           
-          <div class="row ml-1 mb-4 mr-1">
+          <div class="row ml-1 mr-1">
               <div class="col pt-2">
                   <div class="alert alert-primary align-self-end mt-2 w-100">
                       <div class="col-auto pl-0"><strong>Breakout Session:</strong><b-form-select class="inline" v-model="breakoutSessionSelected" :options="breakoutSessionOptions" /></div>
                   </div>
               </div>
           </div>
+          <div class="row ml-1 mb-4 mr-1">
+            <div class="col">
+              <div class="alert alert-success skinny">
+                <a href="https://www.uberconference.com/cmbs4a(866-578-4799)" target="_blank">
+                    <i class="fas fa-phone-square"></i>
+                        <span class="ml-1 pb-2 f-sm"><b>Teleconference Connection</b>  <i>(join remotely)</i></span>
+                    </i>
+                </a>
+              </div>
+            </div>
+        </div>
 
           <ul class="nav nav-tabs mb-2">
             <li class="nav-item" v-for="date in activeBreakoutSession.dates">
@@ -247,6 +258,14 @@ methods:{
 </script>
 
 <style>
+  .skinny {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        padding-left: 10px !important;
+    }
+    .red {
+        color: red;
+    }
   .no-border {
     border: none !important;
   }

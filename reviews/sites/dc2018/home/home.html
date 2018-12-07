@@ -76,9 +76,9 @@
                       </td>
                       <td>
                         <span v-if="event.Topic_ID != ''">
-                            <a :href="event.Link" target="_blank">{{event.Topic_ID }}</a> -
+                            <a class="pl-1" :href="event.Link" target="_blank">{{event.Topic_ID }}</a> -
                         </span> 
-                            {{ event.Topic }}
+                           {{ event.Topic }}
                       </td>
                       <td>
                         <span v-if="event.Location == 'UCDC Auditorium'" class="mr-2">

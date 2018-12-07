@@ -10,7 +10,8 @@
         "decadalsurveyreport": {"id": "decadalsurveyreport", "title":"Decadal Survey Report", "externallink":true, "url":"https://drive.google.com/file/d/1bQv7DhpB9trOtXN0qix_tbzX_fWO6f8J/view", "nav": true,"navImage": "<i class='far fa-file-pdf fa-2x'></i>"},
         "reviewinfo": {"id": "reviewinfo", "title":"Review Committee Information", "keys":["rid", "page:reviewinfo"], "url":"sites/dc2018/reviewdocuments/reviewdocuments.html?rev=2", "nav": true,"navImage": "<i class='fas fa-info fa-2x'></i>"},
         "internalprojectdocumentation": {"id": "internalprojectdocumentation", "title":"Internal Project Documentation", "keys":["rid", "page:internalprojectdocumentation"], "url":"sites/dc2018/internalprojectdocumentation/internalprojectdocumentation.html", "nav": true,"navImage": "<i class='far fa-file-powerpoint fa-2x'></i>"},
-        "logistics": {"id": "logistics", "title":"Logistics", "keys":["rid", "page:logistics"], "url":"sites/dc2018/logistics/logistics.html", "nav": true,"navImage": "<i class='fas fa-gavel fa-2x'></i>"}
+        "logistics": {"id": "logistics", "title":"Logistics", "keys":["rid", "page:logistics"], "url":"sites/dc2018/logistics/logistics.html", "nav": true,"navImage": "<i class='fas fa-gavel fa-2x'></i>"},
+        "download": {"id": "download", "title":"Download Conference", "externallink":true, "url":"https://drive.google.com/uc?export=download&id=1eCryGKbYg2vYmKuFOzDgFtsfan4KZyaQ", "nav": true,"navImage": "<i class='fas fa-download fa-2x'></i>"}
        
       }
     }

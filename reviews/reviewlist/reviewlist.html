@@ -1,44 +1,43 @@
 <link href="https://fonts.googleapis.com/css?family=Merriweather:700" rel="stylesheet">
 
 <div id="reviewlist-app">
-    <div class="cover-image">
-        <div class="cover-text">Reviews</div>
+  <div class="cover-image">
+    <div class="cover-text">Reviews</div>
+  </div>
+  <div class="divider"></div>
+  <div class="d-flex flex-wrap justify-content-center mt-3 mr-2 ml-2">
+    <div v-for="review in reviews" class="card flex-row flex-wrap mr-2 mb-3" @click="review_click(review)">
+      <div class="card-header border-0 pt-5 card-color">
+        <i class="fas fa-broadcast-tower fa-3x"></i>
+      </div>
+      <div class="card-block px-2 pb-4">
+        <h4 class="card-title pt-3 pr-3">{{ review.title }}</h4>
+        <p class="card-text">{{ review.description }}</p>
+        <p class="card-text">
+          <span class="font-weight-bold">Dates:</span> {{ review.dates }}
+        </p>
+      </div>
     </div>
-    <div class="divider"></div>
-        <div class="d-flex flex-wrap justify-content-center mt-3 mr-2 ml-2">
-            <div v-for="review in reviews" class="card flex-row flex-wrap" @click="review_click(review)">
-                <div class="card-header border-0 pt-5 card-color">
-                    <i class="fas fa-broadcast-tower fa-3x"></i>
-                </div>
-                <div class="card-block px-2 pb-4">
-                    <h4 class="card-title pt-3 pr-3">{{ review.title }}</h4>
-                    <p class="card-text">{{ review.description }}</p>
-                    <p class="card-text">
-                       <span class="font-weight-bold">Dates:</span> {{ review.dates }}
-                    </p>
-                </div>
-            </div>
-           
-        </div>
+  </div>
 </div>
 
 <script>
-new Vue({
-el: '#reviewlist-app',
-data: {
-  reviews: []
-},
-created: function() {
-  this.reviews = Globals.config.sites;
-},
-methods: {
-  review_click: function(review){
-    var route = Router.routes.sites[review.id].routes.home;
-    route.params[Constants.RID_QS_PARAM] = review.id; 
-    Router.loadMainToRoute(route);
-  }
-}
-});
+  new Vue({
+    el: '#reviewlist-app',
+    data: {
+      reviews: []
+    },
+    created: function () {
+      this.reviews = Globals.config.sites;
+    },
+    methods: {
+      review_click: function (review) {
+        var route = Router.routes.sites[review.id].routes.home;
+        route.params[Constants.RID_QS_PARAM] = review.id;
+        Router.loadMainToRoute(route);
+      }
+    }
+  });
 </script>
 
 <style>
@@ -46,17 +45,19 @@ methods: {
     background-color: #235789;
     color: #FDFFFC;
   }
+
   .card {
-  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-}
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    width: 700px
+  }
 
-/* Transition to a bigger shadow on hover */
-.card:hover {
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  cursor: pointer;
-}
+  /* Transition to a bigger shadow on hover */
+  .card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
 
-.cover-image {
+  .cover-image {
     display: block;
     margin-top: 2px;
     width: 100%;
@@ -68,41 +69,43 @@ methods: {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-    
-    
-}
-.cover-text {
-  color: #FDFFFC;
-  font-family: 'Merriweather', serif;
-  padding-top: 75px;
-  font-size: 47px;
-  letter-spacing: 5px;
-}
-.divider {
-  margin-top: 2px;
-  width: 100%;
-  height: 15px;
-  background-color: #161925;
-}
 
- #leftnavigation-placeholder {
-   display: none;
- }
 
-#content-placeholder {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
+  }
 
-@media only screen and (max-width: 600px) {
-  .card-header {
+  .cover-text {
+    color: #FDFFFC;
+    font-family: 'Merriweather', serif;
+    padding-top: 75px;
+    font-size: 47px;
+    letter-spacing: 5px;
+  }
+
+  .divider {
+    margin-top: 2px;
+    width: 100%;
+    height: 15px;
+    background-color: #161925;
+  }
+
+  #leftnavigation-placeholder {
     display: none;
   }
-}
 
-@media (max-width: 768px) {
-   #content-placeholder {
-    padding-top: 60px;
+  #content-placeholder {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
   }
-}
+
+  @media only screen and (max-width: 600px) {
+    .card-header {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #content-placeholder {
+      padding-top: 60px;
+    }
+  }
 </style>

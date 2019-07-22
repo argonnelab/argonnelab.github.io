@@ -1,0 +1,253 @@
+<script src="vendors/pdfmake/pdfmake.min.js"></script>
+<script src="vendors/pdfmake/vfs_fonts.js"></script>
+<div class="content-body" id="home-app">
+  <div class="container-fluid">
+    <div class="loadingHeight" v-if="isLoading">
+      <div class="wrap">
+        <div class="loading">
+          <div class="bounceball"></div>
+          <div class="text">LOADING...</div>
+        </div>
+      </div>
+    </div>
+    <div v-show="!isLoading">
+      <div>
+        <img class="header-image" src="/reviews/images/title.jpg">
+      </div>
+      <div class="row">
+        <div class="col">
+          <span class="h2 mt-1 mb-0">Agenda</span>
+        </div>
+        <div class="col-auto mt-3">
+          <i class="fas fa-file-download">
+            <a href="https://drive.google.com/uc?export=download&id=1F9JDfJQehQVsFyv3mvCP383YQINEQNXP" target="_blank">
+              <span class="ml-1">Download pdf version</span>
+            </a>
+          </i>
+        </div>
+      </div>
+
+      <!-- <div class="row ml-1 mr-1">
+        <div class="col pt-2">
+          <div class="alert alert-primary align-self-end mt-2 w-100">
+            <div class="col-auto pl-0"><strong>Breakout Session:</strong>
+              <b-form-select class="inline" v-model="breakoutSessionSelected" :options="breakoutSessionOptions" />
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="row ml-1 mb-4 mr-1 mt-2">
+        <div class="col">
+          <div class="alert alert-success skinny skinny-t">
+            <a href="" target="_blank">
+              <i class="fas fa-phone-square"></i>
+              <span class="ml-1 pb-2 f-sm"><b>Teleconference Connection</b> <i>(TBD) #555-555-5555</i></span>
+              </i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <ul class="nav nav-tabs mb-2">
+        <li class="nav-item" v-for="date in activeBreakoutSession.dates">
+          <a class="nav-link" :id="getDateAsString(date[0].Date)" @click="showDay(date[0])">{{date[0].Date}}</a>
+        </li>
+      </ul>
+      <div class="ml-1">
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr class="border-no-top">
+              <th class="border-no-top">Time</th>
+              <th class="border-no-top">Topic</th>
+              <th class="border-no-top">Location</th>
+              <th class="border-no-top">Speaker</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-bind:class="{'no-border': shouldHideLine(event.Time) }" v-for="event in activeAgenda">
+              <td class="nowrap" v-bind:class="{'no-border': shouldHideLine(event.Time) }">
+                <span v-if="!shouldHideLine(event.Time)">
+                  <span v-bind:class="{'alert-primary skinny skinny-rounded': event.Session != 'All' }">
+                    {{ event.Time }}
+                  </span>
+                </span>
+                <span v-else>
+                  {{ event.Time }}
+                </span>
+              </td>
+              <td>
+                <span v-if="event.Topic_ID != ''">
+                  <a class="pl-1" :href="event.Link" target="_blank">{{event.Topic_ID }}</a> -
+                </span>
+                {{ event.Topic }}
+              </td>
+              <td>
+                <span v-if="event.Location == 'UCDC Auditorium'" class="mr-2">
+                  <a href="https://www.uberconference.com/cmbs4a" target="_blank">
+                    <i class="fas fa-phone-square"></i>
+                  </a>
+                </span>{{ event.Location }}</td>
+              <td>{{ event.Speaker }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  new Vue({
+    el: '#home-app',
+    data: {
+      isLoading: true,
+      breakoutSessionSelected: '',
+      breakoutSessionOptions: [],
+      model: {},
+      activeBreakoutSession: {},
+      activeAgenda: []
+    },
+    created: function () {
+      var self = this;
+      var tabletop = Tabletop.init({
+        key: '1ao175HV8TNer0lxwq7Ug-C0Sxodl7eq1slNFDVMGSk4',
+        callback: self.showInfo,
+        simpleSheet: false
+      });
+    },
+    watch: {
+      breakoutSessionSelected: function () {
+        var self = this;
+        self.activeBreakoutSession = self.model[self.breakoutSessionSelected];
+        var url = window.location.href;
+        url = Router.addToUrl(url, 'session', self.breakoutSessionSelected);
+        Router.pushUrlChange(url);
+        var keys = Object.keys(self.activeBreakoutSession.dates);
+
+        var date = Router.getUrlParameter('date');
+        if (date == undefined) {
+          date = self.activeBreakoutSession.dates[keys[0]][0];
+        } else {
+          var matchedDates = _.find(keys, function (k) {
+            return k == date;
+          });
+
+          if (matchedDates == undefined) {
+            date = self.activeBreakoutSession.dates[keys[0]][0];
+          } else {
+            date = self.activeBreakoutSession.dates[date][0];
+          }
+        }
+        setTimeout(function () {
+          self.showDay(date);
+        }, 200);
+      }
+    },
+    methods: {
+      getDateAsString: function (d) {
+        return d.toString().replaceAll("/", "_");
+      },
+      loadBreakoutSession: function (data, sheetName) {
+        var self = this;
+        self.model[sheetName] = {};
+        var days = _.groupBy(data.elements, 'Date');
+        self.model[sheetName].dates = days;
+
+      },
+      throwError: function (message) {
+
+      },
+      shouldHideLine: function (time) {
+        if (time == '') {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      showInfo: function (data, tabletop) {
+        var self = this;
+        var cont = true;
+
+        if (data.Info == undefined) {
+          cont = false;
+          self.throwError('Info Sheet is missing from Excel file!');
+        } else {
+          _.forEach(data.Info.elements, function (modelInfo) {
+            self.breakoutSessionOptions.push({
+              value: modelInfo.Sheet,
+              text: modelInfo.Sheet + ' - ' + modelInfo.Title
+            });
+            self.loadBreakoutSession(data[modelInfo.Sheet], modelInfo.Sheet);
+          });
+
+          var session = Router.getUrlParameter('session');
+          if (session == undefined) {
+            session = self.breakoutSessionOptions[0].value;
+          } else {
+            var matchedSession = _.find(self.breakoutSessionOptions, function (b) {
+              return b.value == session.toUpperCase();
+            });
+            if (matchedSession == undefined) {
+              session = self.breakoutSessionOptions[0].value;
+            } else {
+              session = matchedSession.value;
+            }
+          }
+          self.breakoutSessionSelected = session;
+        }
+      },
+      showDay: function (day) {
+        var self = this;
+        _.forEach(self.activeBreakoutSession.dates, function (b) {
+          $('#' + self.getDateAsString(b[0].Date)).removeClass('active');
+        });
+
+        $('#' + self.getDateAsString(day.Date)).addClass('active');
+
+        self.activeAgenda = self.activeBreakoutSession.dates[day.Date];
+
+        var url = window.location.href;
+        url = Router.addToUrl(url, 'date', day.Date);
+        Router.pushUrlChange(url);
+
+        self.isLoading = false;
+      }
+    }
+  });
+</script>
+
+<style>
+  .skinny-t {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    padding-left: 10px !important;
+  }
+
+  .red {
+    color: red;
+  }
+
+  .no-border {
+    border: none !important;
+  }
+
+  .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+
+  .custom-select {
+    display: block;
+    font-size: .95em;
+  }
+
+  @media (max-width: 768px) {
+    .custom-select {
+      display: block;
+      font-size: .85em;
+    }
+  }
+</style>

@@ -1,0 +1,40 @@
+<div class="content-body" id="reviewdocuments-app">
+  <div class="container-fluid">
+    <div>
+      <h2 class="ml-3 mt-1 mb-3">Review Committee Information</h2>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-link" @click="open_library"><i class="far fa-folder-open mr-1"></i>open library</button>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col">
+        <iframe id="documents" class="iframe-fill" :src="iframe_src" frameborder="0">Loading...</iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  new Vue({
+    el: '#reviewdocuments-app',
+    data: {
+      id: '18lNGCVGZo8cPkGlWRsUYOYW-WhZsNZmG',
+      iframe_src: ''
+    },
+    created: function () {
+      this.iframe_src = 'https://drive.google.com/embeddedfolderview?id=' + this.id + '#list';
+    },
+    methods: {
+      open_library: function () {
+        var folder = 'https://drive.google.com/drive/u/1/folders/' + this.id;
+        window.open(folder, "_blank");
+      }
+    }
+  });
+</script>
+
+<style>
+
+</style>

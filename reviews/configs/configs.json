@@ -1,19 +1,115 @@
 {
-  "sites":{
-    "dc2018":{
-      "id":"dc2018",
+  "sites": {
+    "dc2018": {
+      "id": "dc2018",
       "title": "Washington, DC-2018 CMB-S4 DSR Review",
       "description": "",
       "dates": "December 11-13 of 2018",
       "routes": {
-        "home": {"id": "home", "title":"Home / Agenda", "keys":["rid", "session", "date"], "url":"sites/dc2018/home/home.html?rev=1", "nav": true, "navImage": "<i class='fas fa-home fa-2x'></i>"},
-        "decadalsurveyreport": {"id": "decadalsurveyreport", "title":"Decadal Survey Report", "externallink":true, "url":"https://drive.google.com/file/d/1bQv7DhpB9trOtXN0qix_tbzX_fWO6f8J/view", "nav": true,"navImage": "<i class='far fa-file-pdf fa-2x'></i>"},
-        "reviewinfo": {"id": "reviewinfo", "title":"Review Committee Information", "keys":["rid", "page:reviewinfo"], "url":"sites/dc2018/reviewdocuments/reviewdocuments.html?rev=2", "nav": true,"navImage": "<i class='fas fa-info fa-2x'></i>"},
-        "internalprojectdocumentation": {"id": "internalprojectdocumentation", "title":"Internal Project Documentation", "keys":["rid", "page:internalprojectdocumentation"], "url":"sites/dc2018/internalprojectdocumentation/internalprojectdocumentation.html", "nav": true,"navImage": "<i class='far fa-file-powerpoint fa-2x'></i>"},
-        "logistics": {"id": "logistics", "title":"Logistics", "keys":["rid", "page:logistics"], "url":"sites/dc2018/logistics/logistics.html", "nav": true,"navImage": "<i class='fas fa-gavel fa-2x'></i>"},
-        "download": {"id": "download", "title":"Download Conference", "externallink":true, "url":"https://drive.google.com/uc?export=download&id=1eCryGKbYg2vYmKuFOzDgFtsfan4KZyaQ", "nav": true,"navImage": "<i class='fas fa-download fa-2x'></i>"}
-       
+        "home": {
+          "id": "home",
+          "title": "Home / Agenda",
+          "keys": ["rid", "session", "date"],
+          "url": "sites/dc2018/home/home.html?rev=1",
+          "nav": true,
+          "navImage": "<i class='fas fa-home fa-2x'></i>"
+        },
+        "decadalsurveyreport": {
+          "id": "decadalsurveyreport",
+          "title": "Decadal Survey Report",
+          "externallink": true,
+          "url": "https://drive.google.com/file/d/1bQv7DhpB9trOtXN0qix_tbzX_fWO6f8J/view",
+          "nav": true,
+          "navImage": "<i class='far fa-file-pdf fa-2x'></i>"
+        },
+        "reviewinfo": {
+          "id": "reviewinfo",
+          "title": "Review Committee Information",
+          "keys": ["rid", "page:reviewinfo"],
+          "url": "sites/dc2018/reviewdocuments/reviewdocuments.html?rev=2",
+          "nav": true,
+          "navImage": "<i class='fas fa-info fa-2x'></i>"
+        },
+        "internalprojectdocumentation": {
+          "id": "internalprojectdocumentation",
+          "title": "Internal Project Documentation",
+          "keys": ["rid", "page:internalprojectdocumentation"],
+          "url": "sites/dc2018/internalprojectdocumentation/internalprojectdocumentation.html",
+          "nav": true,
+          "navImage": "<i class='far fa-file-powerpoint fa-2x'></i>"
+        },
+        "logistics": {
+          "id": "logistics",
+          "title": "Logistics",
+          "keys": ["rid", "page:logistics"],
+          "url": "sites/dc2018/logistics/logistics.html",
+          "nav": true,
+          "navImage": "<i class='fas fa-gavel fa-2x'></i>"
+        },
+        "download": {
+          "id": "download",
+          "title": "Download Conference",
+          "externallink": true,
+          "url": "https://drive.google.com/uc?export=download&id=1eCryGKbYg2vYmKuFOzDgFtsfan4KZyaQ",
+          "nav": true,
+          "navImage": "<i class='fas fa-download fa-2x'></i>"
+        }
+      }
+    },
+    "slac2019": {
+      "id": "slac2019",
+      "title": "Detector Fabrication Review",
+      "description": "Detector Fabrication Planning and Readiness",
+      "dates": "August 22-23 of 2019",
+      "routes": {
+        "home": {
+          "id": "home",
+          "title": "Home / Agenda",
+          "keys": ["rid", "session", "date"],
+          "url": "sites/slac2019/home/home.html?rev=1",
+          "nav": true,
+          "navImage": "<i class='fas fa-home fa-2x'></i>"
+        },
+        "hypres": {
+          "id": "hypres",
+          "title": "ANL, HYPRES/SeeQC and SLAC Site Visits",
+          "url": "sites/slac2019/hypres/hypres.html?rev=1",
+          "nav": true,
+          "navImage": "<i class='far fa-file-pdf fa-2x'></i>"
+        },
+        "reviewinfo": {
+          "id": "reviewinfo",
+          "title": "Review Committee Information",
+          "keys": ["rid", "page:reviewinfo"],
+          "url": "sites/slac2019/reviewdocuments/reviewdocuments.html?rev=2",
+          "nav": true,
+          "navImage": "<i class='fas fa-info fa-2x'></i>"
+        },
+        "internalprojectdocumentation": {
+          "id": "internalprojectdocumentation",
+          "title": "Internal Project Documentation",
+          "keys": ["rid", "page:internalprojectdocumentation"],
+          "url": "sites/slac2019/internalprojectdocumentation/internalprojectdocumentation.html",
+          "nav": true,
+          "navImage": "<i class='far fa-file-powerpoint fa-2x'></i>"
+        },
+        "logistics": {
+          "id": "logistics",
+          "title": "Logistics",
+          "keys": ["rid", "page:logistics"],
+          "url": "sites/slac2019/logistics/logistics.html",
+          "nav": true,
+          "navImage": "<i class='fas fa-gavel fa-2x'></i>"
+        },
+        "download": {
+          "id": "download",
+          "title": "Download Conference",
+          "externallink": true,
+          "url": "https://drive.google.com/uc?export=download&id=1v3-gC0LskLoXYAWDhCZTktSVo9MZ4P_x",
+          "nav": true,
+          "navImage": "<i class='fas fa-download fa-2x'></i>"
+        }
       }
     }
-}
+  }
 }

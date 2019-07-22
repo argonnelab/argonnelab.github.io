@@ -1,0 +1,121 @@
+<div class="content-body" id="logistics-app">
+
+    <div class="container">
+        <div class="row justify-content-center mt-3 bk">
+            <div class="col address-text pr-0">
+                <div><b>Address:</b></div>
+                <div>2575 Sand Hill Rd</div>
+                <div>Menolo Park, CA 94025</div>
+                <div><a href="tel:5555555555">(555) 555-5555</a></div>
+                <div class="mt-1">
+                    <div class="alert alert-danger skinny mr-3">
+                        <a href="https://drive.google.com/file/d/1wq9MJW7ipgwPKj2bm-SRhu3XndCVpqcs/view" target="_blank">
+                            <i class="fas fa-wifi red"></i>
+                            <span class="ml-1 f-sm red"><b>Guest WIFI Instructions</b> <i>(click here)</i></span>
+                            </i>
+                        </a>
+                        <div><b>username: </b>TBD</div>
+                        <div><b>password: </b>TBD</div>
+                    </div>
+                    <div class="alert alert-success skinny mt-1 mr-3">
+                        <a href="" target="_blank">
+                            <i class="fas fa-phone-square"></i>
+                            <span class="ml-1 pb-2 f-sm"><b>Teleconference Connection</b> <i>(TBD) #555-555-5555</i></span>
+                            </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto hide-md pl-0 pr-0 v-center">
+                <img class="address-image " src="/reviews/images/UCDC.jpg">
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col address-text pr-0 pt-2">
+                <div><b>Conference Dinner (TBD)</b></div>
+                <div>TBD</div>
+                <div>TBD</div>
+                <div>
+                    <a target="_blank" class="pl-2" href="https://www.google.com/maps/place/2575+Sand+Hill+Rd,+Menlo+Park,+CA+94025/@37.4198789,-122.2082311,17z/data=!3m1!4b1!4m5!3m4!1s0x808fa549c5b227d3:0x9d9eafd5b45613a2!8m2!3d37.4198747!4d-122.2060424">
+                        <i class="fas fa-map-marked-alt"></i>
+                        2575 Sand Hill Rd, Menlo Park, CA 94025 (SLAC)
+                    </a>
+
+                </div>
+
+            </div>
+            <div class="col-auto hide-md pl-0 pr-0">
+                <img class="logan-image" src="/reviews/images/134-768x305.jpg">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col pl-0 pr-0">
+                <iframe class="map" id="gmap_canvas" src="https://maps.google.com/maps?q=2575%20Sand%20Hill%20Rd%2C%20Menlo%20Park%2C%20CA%2094025&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<script>
+    new Vue({
+        el: '#logistics-app',
+        data: {},
+        created: function () {
+
+        },
+        methods: {}
+    });
+</script>
+
+<style>
+    .skinny {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        padding-left: 10px !important;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .logan-image {
+        height: 200px;
+        width: 590px;
+    }
+
+    .address-text {
+        padding-top: 5px;
+        padding-bottom: 8px;
+        padding-left: 90px;
+        background-color: #F4F4F4;
+        font-size: 15px;
+        line-height: 1.52947;
+        font-weight: 400;
+        letter-spacing: -.021em;
+        font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    }
+
+    .address-image {
+        height: 175px;
+    }
+
+    .bk {
+        background-color: #F4F4F4;
+    }
+
+    .v-center {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    @media (max-width: 768px) {
+        .address-text {
+            padding-top: 10px;
+            padding-left: 50px;
+        }
+    }
+</style>

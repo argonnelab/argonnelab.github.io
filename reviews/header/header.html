@@ -2,45 +2,45 @@
 
 <div id="header-app">
   <div class="header">
-      <span>
-          <a class="link" href="/reviews">CMB</a>
-      </span>
-      <span class="header-title">
-          <a class="link" @click="home_click">{{ title }}</a>
-      </span>
+    <span>
+      <a class="link" href="/reviews">S-4 CMB</a>
+    </span>
+    <span class="header-title">
+      <a class="link" @click="home_click">{{ title }}</a>
+    </span>
   </div>
 </div>
 
 <script>
-var Header = new Vue({
-el: '#header-app',
-data: {
-  title: '',
-  site: {}
-},
-created: function() {
-  
-},
-methods: {
-  home_click: function(){
-    
-  },
-  load: function(site){
-    if (site != undefined) {
-      this.title = site.title;
-      this.site = site;
+  var Header = new Vue({
+    el: '#header-app',
+    data: {
+      title: '',
+      site: {}
+    },
+    created: function () {
+
+    },
+    methods: {
+      home_click: function () {
+
+      },
+      load: function (site) {
+        if (site != undefined) {
+          this.title = site.title;
+          this.site = site;
+        }
+
+      }
     }
-    
-  }
-}
-});
+  });
 </script>
 
 <style>
   .header {
-    top:0;
-    left:0;
-    
+    top: 0;
+    left: 0;
+
     height: 60px;
     background-color: #161925;
     color: #FDFFFC;
@@ -51,15 +51,15 @@ methods: {
   }
 
   .header-title {
-      font-size: 1.46em !important;
-      position: absolute;
-      margin-left: 30px;
+    font-size: 1.46em !important;
+    position: absolute;
+    margin-left: 30px;
   }
 
   @media (max-width: 992px) {
     .header-title {
       font-size: .9em !important;
-      
-  }
+
+    }
   }
 </style>

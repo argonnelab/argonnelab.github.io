@@ -1,0 +1,44 @@
+<div class="content-body" id="reviewdocuments-app">
+  <div class="container-fluid">
+    <div>
+      <h2 class="ml-3 mt-1 mb-3">Internal Project Documentation</h2>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-link" @click="open_library"><i class="far fa-folder-open mr-1"></i>open library</button>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col">
+        <iframe id="documents" class="iframe-fill" :src="iframe_src" frameborder="0">Loading...</iframe>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="1085107727742-sbb9flc8mg806luhls96ur9toc318j28.apps.googleusercontent.com">
+<script>
+  new Vue({
+    el: '#reviewdocuments-app',
+    data: {
+      id: '1VzPjqcoCZWNLZLBK9jc5FHEtqoB1vBlC',
+      iframe_src: ''
+    },
+    created: function () {
+      this.iframe_src = 'https://drive.google.com/embeddedfolderview?id=' + this.id + '#list';
+
+    },
+    methods: {
+      open_library: function () {
+        var folder = 'https://drive.google.com/drive/u/1/folders/' + this.id;
+        window.open(folder, "_blank");
+      }
+    }
+  });
+</script>
+
+<style>
+
+</style>
